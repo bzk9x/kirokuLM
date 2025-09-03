@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.style.width = newWidth + 'px';
         sidebar.style.flex = 'none';
         
-        // Save the width to localStorage
         localStorage.setItem('sidebarWidth', newWidth);
     }
 
@@ -64,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
     splitter.addEventListener('dblclick', () => {
         sidebar.style.width = '';
         sidebar.style.flex = '2';
-        // Clear the saved width
         localStorage.removeItem('sidebarWidth');
     });
 });
