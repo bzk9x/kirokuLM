@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDragging = false;
     let startX, startWidth;
 
+    const savedWidth = localStorage.getItem('sidebarWidth');
+    if (savedWidth) {
+        sidebar.style.width = savedWidth + 'px';
+        sidebar.style.flex = 'none';
+    }
+
     function startDragging(e) {
         isDragging = true;
         startX = e.pageX;
@@ -36,8 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const minWidth = 200;
         const maxWidth = main.offsetWidth * 0.5;
         
-        sidebar.style.width = Math.min(Math.max(width, minWidth), maxWidth) + 'px';
+        const newWidth = Math.min(Math.max(width, minWidth), maxWidth);
+        sidebar.style.width = newWidth + 'px';
         sidebar.style.flex = 'none';
+        
+        // Save the width to localStorage
+        localStorage.setItem('sidebarWidth', newWidth);
     }
 
     splitter.addEventListener('mousedown', startDragging);
@@ -54,5 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     splitter.addEventListener('dblclick', () => {
         sidebar.style.width = '';
         sidebar.style.flex = '2';
+        // Clear the saved width
+        localStorage.removeItem('sidebarWidth');
     });
 });
