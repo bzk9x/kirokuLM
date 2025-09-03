@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const setupWindowControls = require('./windowControls');
 const path = require('path');
 
 function createWindow() {
@@ -12,6 +13,7 @@ function createWindow() {
   });
 
   win.loadFile('src/app/layout/screen_main.html');
+  setupWindowControls(win);
 }
 
 app.whenReady().then(() => {
