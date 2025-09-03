@@ -67,16 +67,48 @@ nav {
 .main {
     flex: 1;
     display: flex;
-    gap: 10px;
+    gap: 0;
     padding: 0 10px 10px 10px;
+    position: relative;
 }
 
 .sidebar {
     flex: 2;
+    min-width: 200px;
+    max-width: 50%;
+    border-radius: 12px;
+}
+
+.splitter {
+    background-color: transparent;
+    cursor: col-resize;
+    position: relative;
+}
+
+.splitter::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    transform: translateX(-50%);
+    transition: background-color 0.2s;
+}
+
+.splitter:hover::after,
+.splitter.dragging::after {
+    background-color: #4a4d52;
 }
 
 .notebook {
     flex: 5;
+    min-width: 300px;
     background-color: #1a1d22;
     border-radius: 12px;
+}
+
+.main.dragging {
+    cursor: col-resize;
+    user-select: none;
 }
