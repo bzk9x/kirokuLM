@@ -5,6 +5,34 @@ document.addEventListener('DOMContentLoaded', () => {
     let isDragging = false;
     let startX, startWidth;
 
+    const avatarEl = document.getElementById('user-avatar');
+    const usernameEl = document.getElementById('username');
+    if (window.userInfo && window.userInfo.get) {
+        window.userInfo.get().then(info => {
+            if (info.username && usernameEl) {
+                usernameEl.textContent = info.username + "'s Notebook";
+            }
+            if (avatarEl) {
+                const setDefaultAvatar = () => {
+                    avatarEl.src = '../res/images/default_avatar.png';
+                };
+
+                if (info.avatarPath) {
+                    const imagePath = `file:///${info.avatarPath.replace(/\\/g, '/')}`;
+                    avatarEl.onerror = setDefaultAvatar;
+                    avatarEl.src = imagePath;
+                } else {
+                    setDefaultAvatar();
+                }
+            }
+        }).catch(err => {
+            console.error('Error loading user info:', err);
+            if (avatarEl) {
+                avatarEl.src = '../res/images/default_avatar.png';
+            }
+        });
+    }
+
     const savedWidth = localStorage.getItem('sidebarWidth');
     if (savedWidth) {
         sidebar.style.width = savedWidth + 'px';
@@ -62,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     splitter.addEventListener('dblclick', () => {
         sidebar.style.width = '';
-        sidebar.style.flex = '2';
+        sidebar.style.flex = '1';
         localStorage.removeItem('sidebarWidth');
     });
 });

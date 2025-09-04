@@ -8,3 +8,7 @@ contextBridge.exposeInMainWorld('windowControls', {
   onMaximized: (callback) => ipcRenderer.on('window-maximized', callback),
   onUnmaximized: (callback) => ipcRenderer.on('window-unmaximized', callback)
 });
+
+contextBridge.exposeInMainWorld('userInfo', {
+  get: () => ipcRenderer.invoke('get-user-info')
+});
