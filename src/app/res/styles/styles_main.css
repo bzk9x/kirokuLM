@@ -108,6 +108,8 @@ nav {
     min-width: 300px;
     background-color: #242424;
     border-radius: 12px;
+    display: flex;
+    overflow: hidden;
 }
 
 .main.dragging {
@@ -118,4 +120,66 @@ nav {
 .title-container img {
     width: 25px;
     height: auto;
+}
+
+.no-notes {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.no-notes-icon {
+    width: 100px;
+    height: auto;
+}
+
+.no-notes-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.bottom-glow {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.glow {
+    height: 75px;
+    background: linear-gradient(90deg, #ffa85187, #33FFEE87, #A424FF87, #FF2F2F87);
+    filter: blur(75px);
+    background-size: 400% 400%;
+    animation: glow-anim 12s ease-in-out infinite;
+}
+
+@keyframes glow-anim {
+    0% {
+        background-position: 0% 50%;
+        transform: scale(1);
+        filter: blur(50px) brightness(1);
+    }
+    25% {
+        background-position: 100% 50%;
+        transform: scale(1.05);
+        filter: blur(55px) brightness(1.2);
+    }
+    50% {
+        background-position: 50% 100%;
+        transform: scale(1);
+        filter: blur(50px) brightness(1);
+    }
+    75% {
+        background-position: 0% 50%;
+        transform: scale(1.05);
+        filter: blur(55px) brightness(1.2);
+    }
+    100% {
+        background-position: 0% 50%;
+        transform: scale(1);
+        filter: blur(50px) brightness(1);
+    }
 }
